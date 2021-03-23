@@ -21,7 +21,7 @@ export default class AddDonor extends Component {
                     <input type="text" placeholder="Enter Last Donation Date" />
                 </div>
 
-                <input type="submit" value="Save Task" />
+                <input type="submit" value="Add Donor" />
 
             </form>
         )
