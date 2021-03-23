@@ -1,5 +1,15 @@
 import axios from "axios";
 import React, { Component } from "react";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
+
 import Donor from "./Donor";
 
 export default class Donors extends Component {
@@ -20,21 +30,23 @@ export default class Donors extends Component {
   render() {
     const { donors } = this.state;
     return (
-      <table className="own-container">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Blood Group</th>
-            <th>Contact Number</th>
-            <th>Last Donation Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {donors.map((donor) => (
-            <Donor donor={donor} key={donor.Sl} />
-          ))}
-        </tbody>
-      </table>
+      <TableContainer component={Paper}>
+        <Table aria-label="Simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Name</TableCell>
+              <TableCell align="center">Blood Group</TableCell>
+              <TableCell align="center">Contact Number</TableCell>
+              <TableCell align="center">Last Donation Date</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {donors.map((donor) => {
+              return <Donor donor={donor} key={donor.Sl} />;
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
     );
   }
 }
