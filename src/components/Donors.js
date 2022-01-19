@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { Component } from "react";
+import React, {useState, useEffect} from "react";
 import {
   Paper,
   Table,
@@ -9,44 +9,34 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
+import DonorList from "./DonorList";
 
-import Donor from "./Donor";
+export default function Donors() {
+  const [donors, setDonors] = useState([]);
 
-export default class Donors extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      donors: [],
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     axios.get("http://localhost:3001/donors").then((res) => {
-      const donors = res.data;
-      this.setState({ donors });
+      setDonors(res.data);
     });
-  }
+  }, []);
 
-  render() {
-    const { donors } = this.state;
-    return (
-      <TableContainer component={Paper}>
-        <Table aria-label="Simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Blood Group</TableCell>
-              <TableCell align="center">Contact Number</TableCell>
-              <TableCell align="center">Last Donation Date</TableCell>
-            </TableRow>
-          </TableHead>
+  return (
+    <TableContainer component={Paper}>
+      <Table aria-label="Simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell align="center">Name</TableCell>
+            <TableCell align="center">Blood Group</TableCell>
+            <TableCell align="center">Contact Number</TableCell>
+            <TableCell align="center">Last Donation Date</TableCell>
+          </TableRow>
+        </TableHead>
           <TableBody>
             {donors.map((donor) => {
-              return <Donor donor={donor} key={donor.Sl} />;
+              return <DonorList donor={donor} key={donor.Sl} />;
             })}
           </TableBody>
         </Table>
       </TableContainer>
     );
-  }
 }
