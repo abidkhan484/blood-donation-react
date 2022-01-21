@@ -1,5 +1,5 @@
 
-export default function AddDonor() {
+export default function Registraion() {
   return (
     <form>
       <div>
