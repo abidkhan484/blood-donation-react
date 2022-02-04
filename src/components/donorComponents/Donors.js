@@ -15,7 +15,8 @@ export default function Donors() {
   const [donors, setDonors] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/donors").then((res) => {
+    axios.get("http://localhost:8000/api/v1/donors").then((res) => {
+      console.log(res.data);
       setDonors(res.data);
     });
   }, []);
